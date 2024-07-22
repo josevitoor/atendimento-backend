@@ -20,13 +20,8 @@ public class Agendamento
     [JsonIgnore]
     public Atendente? Atendente { get; set; }
 
-    [ForeignKey("Servico")]
-    public int ServicoId { get; set; }
+    [ForeignKey("DataServico")]
+    public int DataServicoId { get; set; }
     [JsonIgnore]
-    public Servico? Servico { get; set; }
-
-    [ForeignKey("DataSemana")]
-    public int DataSemanaId { get; set; }
-    [JsonIgnore]
-    public DataSemana? DataSemana { get; set; }
+    public DataServico? DataServico { get; set; }
 }

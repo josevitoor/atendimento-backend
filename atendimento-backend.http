@@ -1,6 +1,6 @@
-@atendimento_backend_HostAddress = http://localhost:5210
+@AtendimentoBackend_HostAddress = http://localhost:5210
 
-GET {{atendimento_backend_HostAddress}}/weatherforecast/
+GET {{AtendimentoBackend_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###

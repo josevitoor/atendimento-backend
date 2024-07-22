@@ -1,7 +1,7 @@
 using AtendimentoBackend.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace APICatalogo.Context;
+namespace AtendimentoBackend.Context;
 
 public class AppDbContext : DbContext
 {

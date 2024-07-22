@@ -20,6 +20,10 @@ public class DataSemana
     [StringLength(20)]
     public string? Dia { get; set; }
 
+    [Required]
+    [StringLength(5)]
+    public string? Horario { get; set; }
+
     [JsonIgnore]
-    public ICollection<DataServico>? DataServicos { get; set; }
+    public ICollection<DataServico> DataServicos { get; set; }
 }
