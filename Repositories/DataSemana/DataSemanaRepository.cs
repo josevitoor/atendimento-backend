@@ -1,5 +1,4 @@
 using AtendimentoBackend.Context;
-using AtendimentoBackend.DTOs;
 using AtendimentoBackend.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -49,7 +48,7 @@ public class DataSemanaRepository : Repository<DataSemana>, IDataSemanaRepositor
         foreach (var item in DatasSemanas)
         {
             var dataSemana = Get(
-                x => x.Dia == item.Dia && 
+                x => x.Dia == item.Dia &&
                 x.Horario == item.Horario
             );
 
@@ -62,9 +61,10 @@ public class DataSemanaRepository : Repository<DataSemana>, IDataSemanaRepositor
                 _dataServicoRepo.Create(dataServicoNovo);
                 _uof.Commit();
             }
-            else {
+            else
+            {
                 var dataServico = _dataServicoRepo.Get(
-                    x => x.DataSemanaId == dataSemana.Id && 
+                    x => x.DataSemanaId == dataSemana.Id &&
                     x.ServicoId == ServicoId
                 );
                 if (dataServico == null)

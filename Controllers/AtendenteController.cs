@@ -10,6 +10,7 @@ namespace AtendimentoBackend.Controllers;
 
 [Route("[controller]")]
 [ApiController]
+[Authorize]
 public class AtendenteController : ControllerBase
 {
     private readonly IUnitOfWork _uof;
@@ -43,7 +44,7 @@ public class AtendenteController : ControllerBase
     [HttpGet("filter/nome/pagination")]
     public ActionResult<IEnumerable<AtendenteResponseDTO>> GetAtendentesFilterPreco
     (
-        [FromQuery] AtendenteFiltroDTO atendenteFiltroDTO, 
+        [FromQuery] AtendenteFiltroDTO atendenteFiltroDTO,
         [FromQuery] PaginationParameters paginationParameters
     )
     {

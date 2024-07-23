@@ -10,6 +10,7 @@ namespace AtendimentoBackend.Controllers;
 
 [Route("[controller]")]
 [ApiController]
+[Authorize]
 public class DataSemanaController : ControllerBase
 {
     private readonly IUnitOfWork _uof;
@@ -68,7 +69,7 @@ public class DataSemanaController : ControllerBase
 
         var novasDatasSemanasDto = _mapper.Map<ICollection<DataSemanaResponseDTO>>(novosDatasSemana);
 
-        if (novasDatasSemanasDto.Count == 0) 
+        if (novasDatasSemanasDto.Count == 0)
             return NoContent();
 
         return new CreatedAtRouteResult("GetDatasSemanas", new { }, novasDatasSemanasDto);

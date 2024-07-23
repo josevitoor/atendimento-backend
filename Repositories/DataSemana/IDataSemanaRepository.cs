@@ -1,4 +1,3 @@
-using AtendimentoBackend.DTOs;
 using AtendimentoBackend.Models;
 
 namespace AtendimentoBackend.Repositories;

@@ -12,4 +12,5 @@ public class AppDbContext : DbContext
     public DbSet<DataSemana>? DatasSemana { get; set; }
     public DbSet<DataServico>? DatasServicos { get; set; }
     public DbSet<Agendamento>? Agendamentos { get; set; }
+    public DbSet<Usuario>? Usuarios { get; set; }
 }

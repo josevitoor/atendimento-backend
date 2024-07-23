@@ -224,3 +224,18 @@ C:\Users\Augusto\Desktop\Dev\TCE\materia_backend\atendimento-backend\bin\Debug\n
 C:\Users\Augusto\Desktop\Dev\TCE\materia_backend\atendimento-backend\bin\Debug\net8.0\Newtonsoft.Json.dll
 C:\Users\Augusto\Desktop\Dev\TCE\materia_backend\atendimento-backend\bin\Debug\net8.0\Newtonsoft.Json.Bson.dll
 C:\Users\Augusto\Desktop\Dev\TCE\materia_backend\atendimento-backend\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+D:\Workspace\Projeto Web\atendimento-backend\bin\Debug\net8.0\AutoMapper.dll
+D:\Workspace\Projeto Web\atendimento-backend\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+D:\Workspace\Projeto Web\atendimento-backend\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Workspace\Projeto Web\atendimento-backend\bin\Debug\net8.0\Microsoft.AspNetCore.JsonPatch.dll
+D:\Workspace\Projeto Web\atendimento-backend\bin\Debug\net8.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+D:\Workspace\Projeto Web\atendimento-backend\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+D:\Workspace\Projeto Web\atendimento-backend\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Workspace\Projeto Web\atendimento-backend\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+D:\Workspace\Projeto Web\atendimento-backend\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+D:\Workspace\Projeto Web\atendimento-backend\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\Workspace\Projeto Web\atendimento-backend\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+D:\Workspace\Projeto Web\atendimento-backend\bin\Debug\net8.0\Newtonsoft.Json.dll
+D:\Workspace\Projeto Web\atendimento-backend\bin\Debug\net8.0\Newtonsoft.Json.Bson.dll
+D:\Workspace\Projeto Web\atendimento-backend\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+D:\Workspace\Projeto Web\atendimento-backend\obj\Debug\net8.0\atendimento-backend.sourcelink.json

@@ -7,9 +7,8 @@
 Certifique-se de ter o .NET SDK instalado em sua máquina. Em seguida, instale as dependências do projeto executando os seguintes comandos:
 
 ```bash
-dotnet add package Microsoft.EntityFrameworkCore
-dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL
-dotnet add package Microsoft.EntityFrameworkCore.Design
+dotnet restore
+dotnet build
 ```
 
 ### 2. Subir o container do Postgres
