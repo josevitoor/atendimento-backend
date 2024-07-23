@@ -50,10 +50,16 @@ public class AgendamentoRepository : Repository<Agendamento>, IAgendamentoReposi
 
     public PagedList<Agendamento> GetAgendamentos(PaginationParameters paginationParameters)
     {
-        var agendamentosOrdenadas = GetAll()
+        var agendamentosOrdenadas = _context.Set<Agendamento>()
+            .AsNoTracking()
             .OrderBy(p => p.Id)
             .AsQueryable()
-            .Include(o => o.Paciente); 
+            .Include(o => o.Paciente)
+            .Include(x => x.Atendente)
+            .Include(o => o.DataServico)
+                .ThenInclude(ds => ds.Servico)
+            .Include(o => o.DataServico)
+                .ThenInclude(ds => ds.DataSemana);
         var agendamentosPaginadas = PagedList<Agendamento>.ToPagedList(
             agendamentosOrdenadas,
             paginationParameters.PageNumber,
@@ -63,32 +69,28 @@ public class AgendamentoRepository : Repository<Agendamento>, IAgendamentoReposi
         return agendamentosPaginadas;
     }
 
-    public PagedList<Agendamento> getAgendamentosFiltroNome(AgendamentoFiltroDTO agendamentoFiltroDto, PaginationParameters paginationParameters)
+    public IEnumerable<Agendamento> GetAllWithRelations()
     {
-        var agendamentos = GetAll().AsQueryable();
-
-        if(!string.IsNullOrEmpty(agendamentoFiltroDto.Nome))
-        {
-            agendamentos = agendamentos
+        return _context.Set<Agendamento>()
+            .AsNoTracking()
             .Include(x => x.Paciente)
-            .Include(o => o.Atendente)
-            .Include(o => o.DataServico)
+            .Include(x => x.Atendente)
+            .Include(x => x.DataServico)
                 .ThenInclude(ds => ds.Servico)
-            .Include(o => o.DataServico)
+            .Include(x => x.DataServico)
                 .ThenInclude(ds => ds.DataSemana)
-            .Where(x => 
-                x.Paciente.Nome.Contains(agendamentoFiltroDto.Nome)||
-                x.Atendente.Nome.Contains(agendamentoFiltroDto.Nome)||
-                x.DataServico.Servico.Nome.Contains(agendamentoFiltroDto.Nome)
-            );
-        }
+            .ToList();
+    }
 
-        var agendamentosFiltrados = PagedList<Agendamento>.ToPagedList(
-            agendamentos,
-            paginationParameters.PageNumber, 
-            paginationParameters.PageSize
-        );
-
-        return agendamentosFiltrados;
+    public Agendamento GetWithRelations(int id){
+        return _context.Set<Agendamento>()
+        .AsNoTracking()
+        .Include(x => x.Paciente)
+        .Include(x => x.Atendente)
+        .Include(x => x.DataServico)
+            .ThenInclude(ds => ds.Servico)
+        .Include(x => x.DataServico)
+            .ThenInclude(ds => ds.DataSemana)
+        .FirstOrDefault(c => c.Id == id);
     }
 }

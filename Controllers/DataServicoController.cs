@@ -25,7 +25,7 @@ public class DataServicoController : ControllerBase
     [HttpGet]
     public ActionResult<IEnumerable<DataServicoResponseDTO>> Get()
     {
-        var dataServico = _uof.DataServicoRepository.GetAll();
+        var dataServico = _uof.DataServicoRepository.GetAllWithRelations();
         if (dataServico is null)
         {
             return NotFound();
@@ -55,7 +55,7 @@ public class DataServicoController : ControllerBase
     [HttpGet("{id}", Name = "ObterDataServico")]
     public ActionResult<DataServicoResponseDTO> Get(int id)
     {
-        var dataServico = _uof.DataServicoRepository.Get(c => c.Id == id);
+        var dataServico = _uof.DataServicoRepository.GetWithRelations(id);
         if (dataServico is null)
         {
             return NotFound("DataServico não encontrado...");

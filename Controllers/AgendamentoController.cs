@@ -25,7 +25,7 @@ public class AgendamentoController : ControllerBase
     [HttpGet]
     public ActionResult<IEnumerable<AgendamentoResponseDTO>> Get()
     {
-        var agendamento = _uof.AgendamentoRepository.GetAll();
+        var agendamento = _uof.AgendamentoRepository.GetAllWithRelations();
         if (agendamento is null)
         {
             return NotFound();
@@ -41,21 +41,10 @@ public class AgendamentoController : ControllerBase
         return ObterAgendamentos(agendamento);
     }
 
-    [HttpGet("filter/nome/pagination")]
-    public ActionResult<IEnumerable<AgendamentoResponseDTO>> GetAgendamentosFilterPreco
-    (
-        [FromQuery] AgendamentoFiltroDTO agendamentoFiltroDTO,
-        [FromQuery] PaginationParameters paginationParameters
-    )
-    {
-        var agendamentos = _uof.AgendamentoRepository.getAgendamentosFiltroNome(agendamentoFiltroDTO, paginationParameters);
-        return ObterAgendamentos(agendamentos);
-    }
-
     [HttpGet("{id}", Name = "ObterAgendamento")]
     public ActionResult<AgendamentoResponseDTO> Get(int id)
     {
-        var agendamento = _uof.AgendamentoRepository.Get(c => c.Id == id);
+        var agendamento = _uof.AgendamentoRepository.GetWithRelations(id);
         if (agendamento is null)
         {
             return NotFound("Agendamento não encontrado...");

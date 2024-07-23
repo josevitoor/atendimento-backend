@@ -1,6 +1,6 @@
 using AtendimentoBackend.Context;
-using AtendimentoBackend.DTOs;
 using AtendimentoBackend.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace AtendimentoBackend.Repositories;
 
@@ -12,7 +12,10 @@ public class DataServicoRepository : Repository<DataServico>, IDataServicoReposi
 
     public PagedList<DataServico> GetDataServicos(PaginationParameters paginationParameters)
     {
-        var dataServicosOrdenadas = GetAll().OrderBy(p => p.Id).AsQueryable();
+        var dataServicosOrdenadas = _context.Set<DataServico>()
+            .AsNoTracking()
+            .Include(x => x.Servico)
+            .Include(x => x.DataSemana).OrderBy(p => p.Id);
         var dataServicosPaginadas = PagedList<DataServico>.ToPagedList(
             dataServicosOrdenadas,
             paginationParameters.PageNumber,
@@ -35,5 +38,23 @@ public class DataServicoRepository : Repository<DataServico>, IDataServicoReposi
         );
 
         return dataServicosFiltrados;
+    }
+
+    public IEnumerable<DataServico> GetAllWithRelations()
+    {
+        return _context.Set<DataServico>()
+            .AsNoTracking()
+            .Include(x => x.Servico)
+            .Include(x => x.DataSemana)
+            .ToList();
+    }
+
+    public DataServico GetWithRelations(int id)
+    {
+        return _context.Set<DataServico>()
+            .AsNoTracking()
+            .Include(x => x.Servico)
+            .Include(x => x.DataSemana)
+            .FirstOrDefault(c => c.Id == id);
     }
 }

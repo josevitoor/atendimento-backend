@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using AtendimentoBackend.DTOs;
 using AtendimentoBackend.Models;
 
@@ -7,5 +8,6 @@ public interface IAgendamentoRepository : IRepository<Agendamento>
 {
     Agendamento CreateAgendamento(Agendamento agendamento);
     PagedList<Agendamento> GetAgendamentos(PaginationParameters paginationParameters);
-    PagedList<Agendamento> getAgendamentosFiltroNome(AgendamentoFiltroDTO agendamentoFiltroDto, PaginationParameters paginationParameters);
+    IEnumerable<Agendamento> GetAllWithRelations();
+    Agendamento GetWithRelations(int id);
 }

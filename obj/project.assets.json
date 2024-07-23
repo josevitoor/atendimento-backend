@@ -3312,19 +3312,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Augusto\\.nuget\\packages\\": {}
+    "C:\\Users\\josev\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\Augusto\\Desktop\\Dev\\TCE\\materia_backend\\atendimento-backend\\atendimento-backend.csproj",
+      "projectUniqueName": "E:\\Atendimento\\atendimento-backend\\atendimento-backend.csproj",
       "projectName": "atendimento-backend",
-      "projectPath": "c:\\Users\\Augusto\\Desktop\\Dev\\TCE\\materia_backend\\atendimento-backend\\atendimento-backend.csproj",
-      "packagesPath": "C:\\Users\\Augusto\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\Augusto\\Desktop\\Dev\\TCE\\materia_backend\\atendimento-backend\\obj\\",
+      "projectPath": "E:\\Atendimento\\atendimento-backend\\atendimento-backend.csproj",
+      "packagesPath": "C:\\Users\\josev\\.nuget\\packages\\",
+      "outputPath": "E:\\Atendimento\\atendimento-backend\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Augusto\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\josev\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3417,7 +3422,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.301/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

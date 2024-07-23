@@ -12,8 +12,6 @@ services:
     hostname: ${POSTGRESQL_HOST}
     ports:
       - ${POSTGRESQL_PORT_EXTERNAL}:${POSTGRESQL_PORT}
-    volumes:
-      - ${POSTGRESQL_PATH}:/var/lib/postgresql/data
     networks:
       - atendimento-network
     environment:
