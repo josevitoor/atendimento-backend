@@ -6,5 +6,6 @@ public interface IUnitOfWork
     IPacienteRepository PacienteRepository { get; }
     IServicoRepository ServicoRepository { get; }
     IDataSemanaRepository DataSemanaRepository { get; }
+    IAgendamentoRepository AgendamentoRepository { get; }
     void Commit();
 }

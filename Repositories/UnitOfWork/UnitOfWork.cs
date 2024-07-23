@@ -9,6 +9,7 @@ public class UnitOfWork : IUnitOfWork
     private IServicoRepository? _servicoRepo;
     private IDataSemanaRepository? _dataSemanaRepo;
     private IDataServicoRepository? _dataServicoRepo;
+    private IAgendamentoRepository? _agendamentoRepo;
 
     public AppDbContext _context;
     public UnitOfWork(AppDbContext context)
@@ -58,6 +59,20 @@ public class UnitOfWork : IUnitOfWork
         get
         {
             return _dataServicoRepo = _dataServicoRepo ?? new DataServicoRepository(_context);
+        }
+    }
+
+    public IAgendamentoRepository AgendamentoRepository
+    {
+        get
+        {
+            return _agendamentoRepo = _agendamentoRepo ?? 
+                new AgendamentoRepository(
+                    _context,
+                    new PacienteRepository(_context),
+                    new AtendenteRepository(_context),
+                    new DataServicoRepository(_context)
+                );
         }
     }
 

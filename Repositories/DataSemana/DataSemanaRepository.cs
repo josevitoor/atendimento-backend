@@ -7,8 +7,8 @@ namespace AtendimentoBackend.Repositories;
 
 public class DataSemanaRepository : Repository<DataSemana>, IDataSemanaRepository
 {
-    private readonly IDataServicoRepository _dataServico;
-    private readonly IServicoRepository _servico;
+    private readonly IDataServicoRepository _dataServicoRepo;
+    private readonly IServicoRepository _servicoRepo;
     private readonly IUnitOfWork _uof;
 
     public DataSemanaRepository(
@@ -19,8 +19,8 @@ public class DataSemanaRepository : Repository<DataSemana>, IDataSemanaRepositor
     ) : base(context)
     {
         _uof = uof;
-        _dataServico = dataServico;
-        _servico = servico;
+        _dataServicoRepo = dataServico;
+        _servicoRepo = servico;
     }
 
     public PagedList<DataSemana> GetDataSemanas(PaginationParameters paginationParameters)
@@ -41,7 +41,7 @@ public class DataSemanaRepository : Repository<DataSemana>, IDataSemanaRepositor
 
     public ICollection<DataSemana> Create(ICollection<DataSemana> DatasSemanas, int ServicoId)
     {
-        var servico = _servico.Get(x => x.Id == ServicoId);
+        var servico = _servicoRepo.Get(x => x.Id == ServicoId);
         if (servico == null)
             throw new ArgumentException("O id do serviço é inválido!");
 
@@ -59,18 +59,18 @@ public class DataSemanaRepository : Repository<DataSemana>, IDataSemanaRepositor
                 _uof.Commit();
                 listaDataSemanasCriadas.Add(dataSemanaCriada);
                 var dataServicoNovo = new DataServico(dataSemanaCriada.Id, ServicoId);
-                _dataServico.Create(dataServicoNovo);
+                _dataServicoRepo.Create(dataServicoNovo);
                 _uof.Commit();
             }
             else {
-                var dataServico = _dataServico.Get(
+                var dataServico = _dataServicoRepo.Get(
                     x => x.DataSemanaId == dataSemana.Id && 
                     x.ServicoId == ServicoId
                 );
                 if (dataServico == null)
                 {
                     var dataServicoNovo = new DataServico(dataSemana.Id, ServicoId);
-                    _dataServico.Create(dataServicoNovo);
+                    _dataServicoRepo.Create(dataServicoNovo);
                     _uof.Commit();
                 }
             }

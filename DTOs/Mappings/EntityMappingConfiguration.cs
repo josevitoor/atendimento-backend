@@ -20,5 +20,8 @@ public class EntityMappingConfiguration : Profile
 
         CreateMap<Servico, ServicoRequestDTO>().ReverseMap();
         CreateMap<Servico, ServicoResponseDTO>().ReverseMap();
+
+        CreateMap<Agendamento, AgendamentoRequestDTO>().ReverseMap();
+        CreateMap<Agendamento, AgendamentoResponseDTO>().ReverseMap();
     }
 }
