@@ -50,7 +50,10 @@ public class AgendamentoRepository : Repository<Agendamento>, IAgendamentoReposi
 
     public PagedList<Agendamento> GetAgendamentos(PaginationParameters paginationParameters)
     {
-        var agendamentosOrdenadas = GetAll().OrderBy(p => p.Id).AsQueryable();
+        var agendamentosOrdenadas = GetAll()
+            .OrderBy(p => p.Id)
+            .AsQueryable()
+            .Include(o => o.Paciente); 
         var agendamentosPaginadas = PagedList<Agendamento>.ToPagedList(
             agendamentosOrdenadas,
             paginationParameters.PageNumber,
@@ -68,11 +71,20 @@ public class AgendamentoRepository : Repository<Agendamento>, IAgendamentoReposi
         {
             agendamentos = agendamentos
             .Include(x => x.Paciente)
-            .Where(x => x.Paciente.Nome.Contains(agendamentoFiltroDto.Nome));
+            .Include(o => o.Atendente)
+            .Include(o => o.DataServico)
+                .ThenInclude(ds => ds.Servico)
+            .Include(o => o.DataServico)
+                .ThenInclude(ds => ds.DataSemana)
+            .Where(x => 
+                x.Paciente.Nome.Contains(agendamentoFiltroDto.Nome)||
+                x.Atendente.Nome.Contains(agendamentoFiltroDto.Nome)||
+                x.DataServico.Servico.Nome.Contains(agendamentoFiltroDto.Nome)
+            );
         }
 
         var agendamentosFiltrados = PagedList<Agendamento>.ToPagedList(
-            agendamentos, 
+            agendamentos,
             paginationParameters.PageNumber, 
             paginationParameters.PageSize
         );

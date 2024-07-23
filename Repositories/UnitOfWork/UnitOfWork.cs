@@ -55,7 +55,7 @@ public class UnitOfWork : IUnitOfWork
         }
     }
 
-    public IDataServicoRepository IDataServicoRepository
+    public IDataServicoRepository DataServicoRepository
     {
         get
         {
