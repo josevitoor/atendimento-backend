@@ -7,6 +7,12 @@ namespace AtendimentoBackend.Models;
 [Table("DatasServicos")]
 public class DataServico
 {
+    public DataServico(int dataSemanaId, int servicoId)
+    {
+        DataSemanaId = dataSemanaId;
+        ServicoId = servicoId;
+    }
+
     [Key]
     public int Id { get; set; }
 

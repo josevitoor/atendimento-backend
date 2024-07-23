@@ -57,6 +57,10 @@ builder.Services.AddEntityFrameworkNpgsql().AddDbContext<AppDbContext>(options =
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<IAtendenteRepository, AtendenteRepository>();
+builder.Services.AddScoped<IPacienteRepository, PacienteRepository>();
+builder.Services.AddScoped<IServicoRepository, ServicoRepository>();
+builder.Services.AddScoped<IDataSemanaRepository, DataSemanaRepository>();
+builder.Services.AddScoped<IDataServicoRepository, DataServicoRepository>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 

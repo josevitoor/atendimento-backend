@@ -22,7 +22,6 @@ public class PacienteController : ControllerBase
     }
 
     [HttpGet]
-    [Authorize]
     public ActionResult<IEnumerable<PacienteResponseDTO>> Get()
     {
         var paciente = _uof.PacienteRepository.GetAll();
