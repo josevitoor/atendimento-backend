@@ -9,6 +9,16 @@ public class DataSemanaRepository : Repository<DataSemana>, IDataSemanaRepositor
     private readonly IDataServicoRepository _dataServicoRepo;
     private readonly IServicoRepository _servicoRepo;
     private readonly IUnitOfWork _uof;
+    private readonly HashSet<string> DiasDaSemana = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+    {
+        "segunda",
+        "terça",
+        "quarta",
+        "quinta",
+        "sexta",
+        "sábado",
+        "domingo"
+    };
 
     public DataSemanaRepository(
         AppDbContext context,
@@ -43,6 +53,9 @@ public class DataSemanaRepository : Repository<DataSemana>, IDataSemanaRepositor
         var servico = _servicoRepo.Get(x => x.Id == ServicoId);
         if (servico == null)
             throw new ArgumentException("O id do serviço é inválido!");
+        
+        if(!DatasSemanas.All(dto => IsMatchingDay(dto.Dia)))
+            throw new ArgumentException("O dia informado não é válido, use o padrão: segunda, terça, quarta...");
 
         var listaDataSemanasCriadas = new List<DataSemana>();
         foreach (var item in DatasSemanas)
@@ -77,5 +90,15 @@ public class DataSemanaRepository : Repository<DataSemana>, IDataSemanaRepositor
         }
 
         return listaDataSemanasCriadas;
+    }
+
+    private bool IsMatchingDay(string? diaSemana)
+    {
+        if (string.IsNullOrEmpty(diaSemana))
+        {
+            return false;
+        }
+
+        return DiasDaSemana.Contains(diaSemana.Trim().ToLower());
     }
 }

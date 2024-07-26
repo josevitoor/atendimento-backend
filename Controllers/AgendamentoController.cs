@@ -15,16 +15,6 @@ public class AgendamentoController : ControllerBase
 {
     private readonly IUnitOfWork _uof;
     private readonly IMapper _mapper;
-    private static readonly Dictionary<DayOfWeek, string> DayOfWeekMap = new Dictionary<DayOfWeek, string>
-    {
-        { DayOfWeek.Monday, "segunda" },
-        { DayOfWeek.Tuesday, "terça" },
-        { DayOfWeek.Wednesday, "quarta" },
-        { DayOfWeek.Thursday, "quinta" },
-        { DayOfWeek.Friday, "sexta" },
-        { DayOfWeek.Saturday, "sábado" },
-        { DayOfWeek.Sunday, "domingo" }
-    };
 
     public AgendamentoController(IUnitOfWork uof, IMapper mapper)
     {
@@ -70,14 +60,6 @@ public class AgendamentoController : ControllerBase
             return BadRequest();
 
         var agendamento = _mapper.Map<Agendamento>(agendamentoDto);
-
-        var dataServico = _uof.DataServicoRepository.GetWithRelations(agendamentoDto.DataServicoId);
-
-        if (dataServico is null)
-            return BadRequest();
-
-        if(!IsMatchingDayOfWeek(agendamentoDto.Data, dataServico.DataSemana.Dia))
-            throw new ArgumentException("A data selecionada não está de acordo com o dia do serviço");
 
         var novoAgendamento = _uof.AgendamentoRepository.CreateAgendamento(agendamento);
         _uof.Commit();
@@ -138,13 +120,5 @@ public class AgendamentoController : ControllerBase
 
         var agendamentosDto = _mapper.Map<IEnumerable<AgendamentoResponseDTO>>(agendamentos);
         return Ok(agendamentosDto);
-    }
-
-    private bool IsMatchingDayOfWeek(DateTime agendamentoDate, string diaSemana)
-    {
-        var dayOfWeek = DayOfWeekMap[agendamentoDate.DayOfWeek].Trim().ToLower();
-        var normalizedDay = diaSemana.Trim().ToLower();
-    
-        return string.Equals(normalizedDay, dayOfWeek);
     }
 }
