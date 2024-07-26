@@ -15,6 +15,16 @@ public class DataSemanaController : ControllerBase
 {
     private readonly IUnitOfWork _uof;
     private readonly IMapper _mapper;
+    private static readonly HashSet<string> DiasDaSemana = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+    {
+        "segunda",
+        "terça",
+        "quarta",
+        "quinta",
+        "sexta",
+        "sábado",
+        "domingo"
+    };
 
     public DataSemanaController(IUnitOfWork uof, IMapper mapper)
     {
@@ -61,6 +71,9 @@ public class DataSemanaController : ControllerBase
     {
         if (dataSemanaDto is null)
             return BadRequest();
+
+        if(!dataSemanaDto.All(dto => IsMatchingDay(dto.Dia)))
+            throw new ArgumentException("O dia informado não é válido, use o padrão: segunda, terça, quarta...");
 
         var datasSemanas = _mapper.Map<ICollection<DataSemana>>(dataSemanaDto);
 
@@ -125,5 +138,15 @@ public class DataSemanaController : ControllerBase
 
         var dataSemanasDto = _mapper.Map<IEnumerable<DataSemanaResponseDTO>>(dataSemanas);
         return Ok(dataSemanasDto);
+    }
+
+    private bool IsMatchingDay(string? diaSemana)
+    {
+        if (string.IsNullOrEmpty(diaSemana))
+        {
+            return false;
+        }
+
+        return DiasDaSemana.Contains(diaSemana.Trim().ToLower());
     }
 }
