@@ -50,6 +50,13 @@ public class UsuarioController : ControllerBase
         if (usuarioPostDTO is null)
             return BadRequest();
 
+        var usuarioRepetido = _uof.UsuarioRepository.Get(x => x.Email == usuarioPostDTO.Email);
+
+        if (usuarioRepetido != null)
+        {
+            throw new ArgumentException("Já existe um usuário cadastrado com esse endereço de email");
+        }
+
         var usuario = _mapper.Map<Usuario>(usuarioPostDTO);
 
         var novoUsuario = _uof.UsuarioRepository.Create(usuario);

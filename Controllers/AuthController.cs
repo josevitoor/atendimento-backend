@@ -11,7 +11,6 @@ public class AuthController : ControllerBase
 {
 
     private readonly IUnitOfWork _uof;
-    private readonly IMapper _mapper;
     private readonly IConfiguration _config;
     private readonly ITokenService _tokenService;
 
@@ -19,7 +18,6 @@ public class AuthController : ControllerBase
     {
         _uof = uof;
         _tokenService = tokenService;
-        _mapper = mapper;
         _config = configuration;
     }
     [HttpPost]
@@ -45,6 +43,6 @@ public class AuthController : ControllerBase
 
         var token = _tokenService.GenerateAccessToken(claims, _config);
 
-        return Ok(new { Token = token });
+        return Ok(new { Token = token, User = usuario });
     }
 }
