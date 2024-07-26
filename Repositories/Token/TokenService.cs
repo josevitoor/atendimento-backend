@@ -19,7 +19,7 @@ public class TokenService : ITokenService
             issuer: _issuer,
             audience: _audience,
             claims: claims,
-            expires: DateTime.Now.AddMinutes(10),
+            expires: DateTime.Now.AddMinutes(30),
             signingCredentials: signinCredentials);
 
         var tokenString = new JwtSecurityTokenHandler().WriteToken(tokeOptions);

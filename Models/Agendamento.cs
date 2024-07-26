@@ -24,4 +24,7 @@ public class Agendamento
     public int DataServicoId { get; set; }
     [JsonIgnore]
     public DataServico? DataServico { get; set; }
+
+    [Required]
+    public DateTime Data { get; set; }
 }

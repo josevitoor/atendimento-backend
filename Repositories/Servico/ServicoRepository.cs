@@ -13,7 +13,8 @@ public class ServicoRepository : Repository<Servico>, IServicoRepository
 
     public PagedList<Servico> GetServicos(PaginationParameters paginationParameters)
     {
-        var servicosOrdenadas = GetAll()
+        var servicosOrdenadas = _context.Set<Servico>()
+            .AsNoTracking()
             .OrderBy(p => p.Id)
             .AsQueryable()
             .Include(o => o.DataServicos)
@@ -29,7 +30,8 @@ public class ServicoRepository : Repository<Servico>, IServicoRepository
 
     public PagedList<Servico> getServicosFiltroNome(ServicoFiltroDTO servicoFiltroDto, PaginationParameters paginationParameters)
     {
-        var servicos = GetAll().AsQueryable();
+        var servicos = _context.Set<Servico>()
+            .AsNoTracking().AsQueryable();
 
         if(!string.IsNullOrEmpty(servicoFiltroDto.Nome))
         {
@@ -46,5 +48,23 @@ public class ServicoRepository : Repository<Servico>, IServicoRepository
         );
 
         return servicosFiltrados;
+    }
+
+    public IEnumerable<Servico> GetAllWithRelations()
+    {
+        return _context.Set<Servico>()
+            .AsNoTracking()
+            .Include(x => x.DataServicos)
+                .ThenInclude(c => c.DataSemana)
+            .ToList();
+    }
+
+    public Servico GetWithRelations(int id)
+    {
+        return _context.Set<Servico>()
+            .AsNoTracking()
+            .Include(x => x.DataServicos)
+                .ThenInclude(c => c.DataSemana)
+            .FirstOrDefault(c => c.Id == id);
     }
 }

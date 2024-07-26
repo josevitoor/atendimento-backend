@@ -11,4 +11,7 @@ public class AgendamentoRequestDTO
 
     [Required]
     public int DataServicoId { get; set; }
+    
+    [Required]
+    public DateTime Data { get; set; }
 }

@@ -25,7 +25,7 @@ public class ServicoController : ControllerBase
     [HttpGet]
     public ActionResult<IEnumerable<ServicoResponseDTO>> Get()
     {
-        var servico = _uof.ServicoRepository.GetAll();
+        var servico = _uof.ServicoRepository.GetAllWithRelations();
         if (servico is null)
         {
             return NotFound();
@@ -55,7 +55,7 @@ public class ServicoController : ControllerBase
     [HttpGet("{id}", Name = "ObterServico")]
     public ActionResult<ServicoResponseDTO> Get(int id)
     {
-        var servico = _uof.ServicoRepository.Get(c => c.Id == id);
+        var servico = _uof.ServicoRepository.GetWithRelations(id);
         if (servico is null)
         {
             return NotFound("Servico não encontrado...");

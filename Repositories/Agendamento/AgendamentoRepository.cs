@@ -35,14 +35,14 @@ public class AgendamentoRepository : Repository<Agendamento>, IAgendamentoReposi
         }
 
         var agendamento = Get(
-            x => x.PacienteId == paciente.Id && 
+            x => 
             x.AtendenteId == atendente.Id && 
             x.DataServicoId == dataServico.Id
         );
 
         if (agendamento != null)
         {
-            throw new InvalidOperationException("Já existe um agendamento com os dados fornecidos.");
+            throw new ArgumentException("Já existe um agendamento marcado para esse atendente nessa data e serviço");
         }
 
         return Create(novoAgendamento);
