@@ -27,9 +27,11 @@ public class DataServicoRepository : Repository<DataServico>, IDataServicoReposi
 
     public PagedList<DataServico> getDataServicosFiltroId(int id, PaginationParameters paginationParameters)
     {
-        var dataServicos = GetAll().AsQueryable();
-
-        dataServicos = dataServicos.Where(x => x.ServicoId == id);
+        var dataServicos = _context.Set<DataServico>()
+            .AsNoTracking()
+            .Include(x => x.Servico)
+            .Include(x => x.DataSemana)
+            .Where(x => x.ServicoId == id);
 
         var dataServicosFiltrados = PagedList<DataServico>.ToPagedList(
             dataServicos, 
